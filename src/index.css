@@ -1,0 +1,355 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  /* background-color: #242424; */
+  /* background: linear-gradient(135deg, #033236, #02b3c6); */
+  /* background: linear-gradient(135deg, #3E82FC, #000000); */
+  background: linear-gradient(180deg, #120f19 35%, blue 75%);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  /* min-width: 320px; */
+  min-height: 100vh;
+}
+
+/* Reset default margins */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.main-body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.main-body-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+
+/* ------------------- header section ------------------------ */
+.header-content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  /* vertical centering */
+  justify-content: center;
+  /* horizontal centering */
+  height: 100%;
+  /* take up full container height */
+  padding-top: 0;
+  /* remove top padding that pushes content down */
+}
+
+.header-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.header-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2;
+  flex-wrap: wrap;
+}
+
+.icon-rock {
+  animation: rock 1s ease-in-out infinite alternate;
+  margin-top: 32px;
+  /* same as mt: 4 in MUI (theme spacing = 8px * 4) */
+}
+
+
+/* ------------------- body1 section ------------------------ */
+.card-header {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+
+/* ------------------- body1 section ------------------------ */
+.body2-container {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+
+.usa-map-img {
+  width: 100%;
+  height: "auto";
+  /* WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)",
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskSize: "cover",
+                    maskImage: "linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)",
+                    maskRepeat: "no-repeat",
+                    maskSize: "cover", */
+}
+
+/* ------------------- Services Body2 ------------------------ */
+.masked-text {
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  font-size: clamp(3rem, 10vw, 14rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  background: url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2089');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  -webkit-text-stroke: 2px black;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #213547;
+  text-align: left;
+}
+
+/* ------------------- Services Body2/Hexagon Grid ------------------------ */
+.hexagon-grid-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.hexagon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  gap: 5px;
+  position: relative;
+  justify-content: center;
+}
+
+.hexagon-item {
+  transition: transform 0.3s ease;
+}
+
+/* Offset pattern for desktop */
+.hexagon-item:nth-child(4),
+.hexagon-item:nth-child(5),
+.hexagon-item:nth-child(6) {
+  transform: translateX(130px) translateY(-65px);
+}
+
+.hexagon-item:hover .hexagon-shape {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hexagon-shape {
+  width: 200px;
+  height: 230px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(180deg, #120f19 5%, blue 95%);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  padding: 30px 20px;
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hexagon-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.hexagon-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hexagon-description {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Responsive Hexagon Grid */
+@media (max-width: 1200px) {
+  .hexagon-grid {
+    grid-template-columns: repeat(3, 180px);
+    gap: 8px 15px;
+  }
+
+  /* Adjust offset for smaller desktop */
+  .hexagon-item:nth-child(4),
+  .hexagon-item:nth-child(5),
+  .hexagon-item:nth-child(6) {
+    transform: translateX(95px) translateY(-55px);
+  }
+
+  .hexagon-shape {
+    width: 160px;
+    height: 184px;
+    padding: 25px 15px;
+  }
+
+  .hexagon-icon {
+    font-size: 40px;
+  }
+
+  .hexagon-title {
+    font-size: 16px;
+  }
+
+  .hexagon-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hexagon-grid {
+    grid-template-columns: repeat(2, 140px);
+    gap: 5px 10px;
+  }
+
+  /* Reset offset and create 2-column honeycomb */
+  .hexagon-item:nth-child(4),
+  .hexagon-item:nth-child(5),
+  .hexagon-item:nth-child(6) {
+    transform: none;
+  }
+
+  .hexagon-item:nth-child(2),
+  .hexagon-item:nth-child(4),
+  .hexagon-item:nth-child(6) {
+    transform: translateX(75px) translateY(-60px);
+  }
+
+  .hexagon-shape {
+    width: 140px;
+    height: 161px;
+    padding: 20px 12px;
+  }
+
+  .hexagon-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .hexagon-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .hexagon-description {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hexagon-grid-container {
+    overflow-x: auto;
+    /* overflow-y: hidden; */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 20px 10px;
+    justify-content: left;
+    /* width: 100%; */
+  }
+
+  .hexagon-grid {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    /* width: max-content; */
+    gap: 20px;
+  }
+
+  .hexagon-shape {
+    width: 160px;
+    height: 184px;
+  }
+
+  /* Create alternating offset pattern on mobile */
+  .hexagon-item {
+    transform: none !important;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+}
+
+/* ------------------- common ------------------------ */
+.grid-card {
+  padding: 32px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-center {
+  display: "flex";
+  flex-direction: "column";
+  align-items: "center";
+  justify-content: "center";
+}
+
+@keyframes rock {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
