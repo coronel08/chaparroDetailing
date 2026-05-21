@@ -1,14 +1,12 @@
+/* ── Global reset & base ───────────────────────────────────────────────── */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-  /* background: linear-gradient(135deg, #033236, #02b3c6); */
-  /* background: linear-gradient(135deg, #3E82FC, #000000); */
-  background: linear-gradient(180deg, #120f19 35%, blue 75%);
+  color-scheme: dark;
+  color: #f4f4f5; /* zinc-100 */
+  background-color: #0a0a0a; /* obsidian */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,8 +16,8 @@
 
 body {
   margin: 0;
-  /* min-width: 320px; */
   min-height: 100vh;
+  background-color: #0a0a0a;
 }
 
 /* Reset default margins */
@@ -37,319 +35,224 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ── Hero image zoom-in on load ────────────────────────────────────────── */
+@keyframes heroZoom {
+  from {
+    transform: scale(1.1);
   }
-
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
+  to {
+    transform: scale(1);
   }
 }
 
-.main-body {
-  position: absolute;
-  inset: 0;
+/* ── Scroll indicator animation ───────────────────────────────────────── */
+@keyframes scrollDrop {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(48px);
+  }
+}
+
+.scroll-indicator-bar {
+  animation: scrollDrop 1.5s linear infinite;
+}
+
+/* ── Gallery grid ──────────────────────────────────────────────────────── */
+/* Used by GallerySection.tsx */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 250px;
+  gap: 16px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
+  transition: transform 0.7s ease;
 }
 
-.main-body-overlay {
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
   position: absolute;
   inset: 0;
+  transition: background 0.5s ease;
   z-index: 1;
 }
 
-
-/* ------------------- header section ------------------------ */
-.header-content {
-  position: relative;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  /* vertical centering */
-  justify-content: center;
-  /* horizontal centering */
-  height: 100%;
-  /* take up full container height */
-  padding-top: 0;
-  /* remove top padding that pushes content down */
+.gallery-span-2-col {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
-.header-container {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  color: white;
+.gallery-span-2-row {
+  grid-row: span 2;
 }
 
-.header-text-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2;
-  flex-wrap: wrap;
-}
-
-.icon-rock {
-  animation: rock 1s ease-in-out infinite alternate;
-  margin-top: 32px;
-  /* same as mt: 4 in MUI (theme spacing = 8px * 4) */
-}
-
-
-/* ------------------- body1 section ------------------------ */
-.card-header {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
-
-
-/* ------------------- body1 section ------------------------ */
-.body2-container {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-
-
-.usa-map-img {
-  width: 100%;
-  height: "auto";
-  /* WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)",
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskSize: "cover",
-                    maskImage: "linear-gradient(to right, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)",
-                    maskRepeat: "no-repeat",
-                    maskSize: "cover", */
-}
-
-/* ------------------- Services Body2 ------------------------ */
-.masked-text {
-  font-family: 'Arial Black', 'Impact', sans-serif;
-  font-size: clamp(3rem, 10vw, 14rem);
-  font-weight: 900;
-  text-transform: uppercase;
-  background: url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2089');
-  background-size: cover;
-  background-position: center;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  line-height: 1;
-  margin: 0;
-  text-align: center;
-  -webkit-text-stroke: 2px black;
-}
-
-.card-title {
-  font-size: 24px;
-  font-weight: 800;
-  color: #213547;
-  text-align: left;
-}
-
-/* ------------------- Services Body2/Hexagon Grid ------------------------ */
-.hexagon-grid-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.hexagon-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 250px);
-  gap: 5px;
-  position: relative;
-  justify-content: center;
-}
-
-.hexagon-item {
-  transition: transform 0.3s ease;
-}
-
-/* Offset pattern for desktop */
-.hexagon-item:nth-child(4),
-.hexagon-item:nth-child(5),
-.hexagon-item:nth-child(6) {
-  transform: translateX(130px) translateY(-65px);
-}
-
-.hexagon-item:hover .hexagon-shape {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.hexagon-shape {
-  width: 200px;
-  height: 230px;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: linear-gradient(180deg, #120f19 5%, blue 95%);
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
-  padding: 30px 20px;
-  color: white;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.hexagon-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.hexagon-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.hexagon-description {
-  font-size: 13px;
-  line-height: 1.4;
-  opacity: 0.9;
-}
-
-/* Responsive Hexagon Grid */
-@media (max-width: 1200px) {
-  .hexagon-grid {
-    grid-template-columns: repeat(3, 180px);
-    gap: 8px 15px;
-  }
-
-  /* Adjust offset for smaller desktop */
-  .hexagon-item:nth-child(4),
-  .hexagon-item:nth-child(5),
-  .hexagon-item:nth-child(6) {
-    transform: translateX(95px) translateY(-55px);
-  }
-
-  .hexagon-shape {
-    width: 160px;
-    height: 184px;
-    padding: 25px 15px;
-  }
-
-  .hexagon-icon {
-    font-size: 40px;
-  }
-
-  .hexagon-title {
-    font-size: 16px;
-  }
-
-  .hexagon-description {
-    font-size: 12px;
-  }
+.gallery-span-2-col-wide {
+  grid-column: span 2;
 }
 
 @media (max-width: 768px) {
-  .hexagon-grid {
-    grid-template-columns: repeat(2, 140px);
-    gap: 5px 10px;
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
   }
 
-  /* Reset offset and create 2-column honeycomb */
-  .hexagon-item:nth-child(4),
-  .hexagon-item:nth-child(5),
-  .hexagon-item:nth-child(6) {
-    transform: none;
-  }
-
-  .hexagon-item:nth-child(2),
-  .hexagon-item:nth-child(4),
-  .hexagon-item:nth-child(6) {
-    transform: translateX(75px) translateY(-60px);
-  }
-
-  .hexagon-shape {
-    width: 140px;
-    height: 161px;
-    padding: 20px 12px;
-  }
-
-  .hexagon-icon {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-
-  .hexagon-title {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-
-  .hexagon-description {
-    font-size: 11px;
+  .gallery-span-2-col,
+  .gallery-span-2-row,
+  .gallery-span-2-col-wide {
+    grid-column: span 1;
+    grid-row: span 1;
   }
 }
 
-@media (max-width: 480px) {
-  .hexagon-grid-container {
-    overflow-x: auto;
-    /* overflow-y: hidden; */
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding: 20px 10px;
-    justify-content: left;
-    /* width: 100%; */
-  }
-
-  .hexagon-grid {
-    display: flex;
-    flex-direction: row;
-    /* align-items: center; */
-    /* width: max-content; */
-    gap: 20px;
-  }
-
-  .hexagon-shape {
-    width: 160px;
-    height: 184px;
-  }
-
-  /* Create alternating offset pattern on mobile */
-  .hexagon-item {
-    transform: none !important;
-    flex-shrink: 0;
-    scroll-snap-align: center;
-  }
-}
-
-/* ------------------- common ------------------------ */
-.grid-card {
-  padding: 32px;
-  text-align: center;
-  flex-grow: 1;
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+.nav-logo {
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.nav-logo-name {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.nav-logo-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-phone-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-drawer-close {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.nav-mobile-actions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nav-mobile-phone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.footer-brand-link {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  text-decoration: none;
+}
+
+.footer-brand-name {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.footer-brand-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.footer-section-heading {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.footer-contact-row--center {
+  align-items: center;
+}
+
+.footer-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.flex-center {
-  display: "flex";
-  flex-direction: "column";
-  align-items: "center";
-  justify-content: "center";
+.footer-bottom {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@keyframes rock {
-  from {
-    transform: rotateY(0deg);
-  }
+/* ── Process step connecting line ──────────────────────────────────────── */
+/* Used by ProcessSection.tsx */
+.process-connector {
+  display: none;
+}
 
-  to {
-    transform: rotateY(360deg);
+@media (min-width: 1200px) {
+  .process-connector {
+    display: block;
+    position: absolute;
+    top: 48px; /* vertically centered with the icon circles */
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: #27272a; /* zinc-800 / theme divider */
+    z-index: 0;
   }
 }

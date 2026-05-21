@@ -31,6 +31,7 @@ function App() {
                     }}
                 >
                     <Navbar />
+                    {/* Offset for fixed AppBar — Hero handles its own padding-top */}
                     <Box sx={{ flexGrow: 1 }}>
                         <Routes>
                             <Route path="/" element={<Home />} />
