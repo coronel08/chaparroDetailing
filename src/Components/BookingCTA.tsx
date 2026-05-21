@@ -1,7 +1,6 @@
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import PhoneIcon from "@mui/icons-material/Phone";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 function BookingCTA() {
     const theme = useTheme();
@@ -17,24 +16,14 @@ function BookingCTA() {
                 overflow: "hidden",
             }}
         >
-            {/* Soft amber radial glow behind the text */}
+            {/* Radial glow — only the theme colour stays in sx */}
             <Box
-                sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "800px",
-                    height: "400px",
-                    background: alpha(theme.palette.primary.main, 0.05),
-                    filter: "blur(120px)",
-                    borderRadius: "50%",
-                    pointerEvents: "none",
-                }}
+                className="cta-glow"
+                sx={{ background: alpha(theme.palette.primary.main, 0.05) }}
             />
 
             <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
-                <Box sx={{ textAlign: "center" }} data-aos="fade-up">
+                <Box className="section-header" data-aos="fade-up">
                     <Typography
                         variant="h2"
                         sx={{
@@ -68,15 +57,13 @@ function BookingCTA() {
                             gap: 2,
                         }}
                     >
-                        {/* Call button */}
                         <Button
                             component="a"
-                            href="tel:+1234567890"
+                            href="tel:+13235109665"
                             variant="contained"
                             color="secondary"
                             disableElevation
                             startIcon={<PhoneIcon />}
-                            fullWidth={false}
                             sx={{
                                 width: { xs: "100%", sm: "auto" },
                                 px: 4,

@@ -5,8 +5,10 @@
   font-weight: 400;
 
   color-scheme: dark;
-  color: #f4f4f5; /* zinc-100 */
-  background-color: #0a0a0a; /* obsidian */
+  color: #f4f4f5;
+  /* zinc-100 */
+  background-color: #0a0a0a;
+  /* obsidian */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +22,6 @@ body {
   background-color: #0a0a0a;
 }
 
-/* Reset default margins */
 h1,
 h2,
 h3,
@@ -35,21 +36,92 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ── Hero image zoom-in on load ────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────
+   SHARED UTILITIES
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Eyebrow label above section headings — used in every section */
+.section-eyebrow {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* Centered section header wrapper */
+.section-header {
+  text-align: center;
+}
+
+/* Vertical flex list with 16px gap — replaces footer-contact-list AND
+   the base of nav-mobile-actions (which just adds a top margin on top) */
+.col-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   HERO
+   ──────────────────────────────────────────────────────────────────────── */
 @keyframes heroZoom {
   from {
     transform: scale(1.1);
   }
+
   to {
     transform: scale(1);
   }
 }
 
-/* ── Scroll indicator animation ───────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Full-cover background image that zooms in on load */
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  animation: heroZoom 1.5s ease-out forwards;
+}
+
+/* Gradient overlay — background-color set by theme in sx */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Content wrapper */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Sub-heading body text */
+.hero-body {
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   SCROLL INDICATOR (Hero)
+   ──────────────────────────────────────────────────────────────────────── */
 @keyframes scrollDrop {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(48px);
   }
@@ -59,8 +131,9 @@ html {
   animation: scrollDrop 1.5s linear infinite;
 }
 
-/* ── Gallery grid ──────────────────────────────────────────────────────── */
-/* Used by GallerySection.tsx */
+/* ────────────────────────────────────────────────────────────────────────
+   GALLERY
+   ──────────────────────────────────────────────────────────────────────── */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -76,6 +149,7 @@ html {
 }
 
 .gallery-item img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -120,7 +194,99 @@ html {
   }
 }
 
-/* ── Navbar ─────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────
+   PROCESS
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Step card — centered flex column */
+.process-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Circular icon container — colours set in sx for theme */
+.process-icon-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Step description body text */
+.process-step-text {
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+/* Desktop connecting line between steps */
+.process-connector {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .process-connector {
+    display: block;
+    position: absolute;
+    top: 48px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: #27272a;
+    /* zinc-800 / theme divider */
+    z-index: 0;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   TESTIMONIALS
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Row of 5 star icons */
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+/* Italic review quote */
+.testimonial-quote {
+  font-style: italic;
+  line-height: 1.75;
+}
+
+/* Reviewer name */
+.testimonial-name {
+  font-size: 1.2rem;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   BOOKING CTA
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* Decorative radial glow — background colour set in sx for theme */
+.cta-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  filter: blur(120px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   NAVBAR
+   ──────────────────────────────────────────────────────────────────────── */
 .nav-logo {
   display: flex;
   flex-direction: column;
@@ -148,6 +314,7 @@ html {
   transition: color 0.2s;
 }
 
+/* Phone link extends nav-link with flex row layout */
 .nav-phone-link {
   display: flex;
   align-items: center;
@@ -164,11 +331,9 @@ html {
   margin-bottom: 32px;
 }
 
+/* Mobile actions uses the shared col-list + adds top margin */
 .nav-mobile-actions {
   margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }
 
 .nav-mobile-phone {
@@ -179,7 +344,9 @@ html {
   font-size: 1.1rem;
 }
 
-/* ── Footer ─────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────
+   FOOTER
+   ──────────────────────────────────────────────────────────────────────── */
 .footer-brand-link {
   display: inline-flex;
   flex-direction: column;
@@ -205,12 +372,8 @@ html {
   margin-bottom: 24px;
 }
 
-.footer-contact-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+/* Contact rows use shared col-list for the list,
+   each row is a flex row with icon + text */
 .footer-contact-row {
   display: flex;
   align-items: flex-start;
@@ -236,23 +399,4 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* ── Process step connecting line ──────────────────────────────────────── */
-/* Used by ProcessSection.tsx */
-.process-connector {
-  display: none;
-}
-
-@media (min-width: 1200px) {
-  .process-connector {
-    display: block;
-    position: absolute;
-    top: 48px; /* vertically centered with the icon circles */
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background-color: #27272a; /* zinc-800 / theme divider */
-    z-index: 0;
-  }
 }

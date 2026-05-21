@@ -82,7 +82,8 @@ function Footer() {
                         >
                             Contact
                         </Typography>
-                        <Box className="footer-contact-list">
+                        {/* col-list provides flex-direction: column + 16px gap */}
+                        <Box className="col-list">
                             <Box className="footer-contact-row">
                                 <AccessTimeIcon
                                     sx={{

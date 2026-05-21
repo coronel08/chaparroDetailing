@@ -14,7 +14,7 @@ const images = [
     },
     {
         url: "https://images.squarespace-cdn.com/content/v1/5a7fb700d74cffd8f02428bf/1549039763632-Z29HWK0B1MPUE3YUKNXC/What-is-Mobile-Detailing-min.png?format=1500w",
-        alt: " Rim wash",
+        alt: "Rim wash",
         className: "",
     },
     {
@@ -24,7 +24,7 @@ const images = [
     },
     {
         url: "https://cheetahclean.com/wp-content/uploads/2022/07/Screen-Shot-2022-07-25-at-6.25.40-PM.png",
-        alt: " Wax",
+        alt: "Wax",
         className: "",
     },
 ];
@@ -36,10 +36,7 @@ function GallerySection() {
         <Box
             component="section"
             id="gallery"
-            sx={{
-                py: { xs: 10, md: 14 },
-                bgcolor: "background.paper",
-            }}
+            sx={{ py: { xs: 10, md: 14 }, bgcolor: "background.paper" }}
         >
             <Container maxWidth="lg">
                 {/* ── Header ─────────────────────────────────────────── */}
@@ -56,7 +53,7 @@ function GallerySection() {
                     <Box data-aos="fade-up">
                         <Typography
                             variant="subtitle2"
-                            sx={{ mb: 2, display: "block" }}
+                            className="section-eyebrow"
                         >
                             Our Work
                         </Typography>
@@ -75,7 +72,7 @@ function GallerySection() {
                             key={index}
                             className={`gallery-item ${img.className}`}
                             sx={{
-                                // Overlay using theme color
+                                // Overlay tint uses theme colour — rest handled in CSS
                                 "& .gallery-overlay": {
                                     background: alpha(
                                         theme.palette.background.default,
@@ -88,21 +85,8 @@ function GallerySection() {
                             }}
                         >
                             <Box className="gallery-overlay" />
-                            <Box
-                                component="img"
-                                src={img.url}
-                                alt={img.alt}
-                                sx={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    transition: "transform 0.7s ease",
-                                    display: "block",
-                                    "&:hover": {
-                                        transform: "scale(1.05)",
-                                    },
-                                }}
-                            />
+                            {/* No sx needed — .gallery-item img in CSS covers everything */}
+                            <Box component="img" src={img.url} alt={img.alt} />
                         </Box>
                     ))}
                 </Box>

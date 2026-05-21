@@ -9,8 +9,7 @@ const steps = [
     {
         icon: CalendarMonthIcon,
         title: "1. Book",
-        description:
-            "Schedule your appointment. We come to you.",
+        description: "Schedule your appointment. We come to you.",
     },
     {
         icon: SearchIcon,
@@ -47,11 +46,11 @@ function ProcessSection() {
         >
             <Container maxWidth="lg">
                 {/* ── Header ─────────────────────────────────────────── */}
-                <Box sx={{ textAlign: "center", mb: { xs: 8, md: 12 } }}>
+                <Box className="section-header" sx={{ mb: { xs: 8, md: 12 } }}>
                     <Typography
                         variant="subtitle2"
+                        className="section-eyebrow"
                         data-aos="fade-up"
-                        sx={{ mb: 2, display: "block" }}
                     >
                         How It Works
                     </Typography>
@@ -77,7 +76,6 @@ function ProcessSection() {
                         position: "relative",
                     }}
                 >
-                    {/* Horizontal connector line — desktop only (via CSS) */}
                     <Box className="process-connector" />
 
                     {steps.map((step, index) => {
@@ -85,31 +83,16 @@ function ProcessSection() {
                         return (
                             <Box
                                 key={step.title}
+                                className="process-step"
                                 data-aos="fade-up"
                                 data-aos-delay={index * 120}
-                                sx={{
-                                    position: "relative",
-                                    zIndex: 1,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textAlign: "center",
-                                }}
                             >
-                                {/* Icon circle */}
+                                {/* Icon circle — only theme colours stay in sx */}
                                 <Box
+                                    className="process-icon-circle"
                                     sx={{
-                                        width: 96,
-                                        height: 96,
-                                        borderRadius: "50%",
                                         bgcolor: "background.paper",
                                         border: `1px solid ${theme.palette.divider}`,
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        mb: 3,
-                                        transition:
-                                            "border-color 0.3s, background-color 0.3s",
                                         "&:hover": {
                                             borderColor: alpha(
                                                 theme.palette.primary.main,
@@ -136,11 +119,8 @@ function ProcessSection() {
 
                                 <Typography
                                     variant="body2"
-                                    sx={{
-                                        lineHeight: 1.7,
-                                        maxWidth: "260px",
-                                        color: "text.secondary",
-                                    }}
+                                    className="process-step-text"
+                                    sx={{ color: "text.secondary" }}
                                 >
                                     {step.description}
                                 </Typography>

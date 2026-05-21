@@ -68,7 +68,10 @@ function Navbar() {
                     <Box component="a" href="#" className="nav-logo">
                         <Typography
                             className="nav-logo-name"
-                            sx={{ fontFamily: theme.typography.h4.fontFamily, color: "text.primary" }}
+                            sx={{
+                                fontFamily: theme.typography.h4.fontFamily,
+                                color: "text.primary",
+                            }}
                         >
                             Chaparro
                         </Typography>
@@ -81,7 +84,13 @@ function Navbar() {
                     </Box>
 
                     {/* ── Desktop nav links ──────────────────────────── */}
-                    <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 4 }}>
+                    <Box
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            alignItems: "center",
+                            gap: 4,
+                        }}
+                    >
                         {navLinks.map((link) => (
                             <Box
                                 key={link.label}
@@ -90,7 +99,9 @@ function Navbar() {
                                 className="nav-link"
                                 sx={{
                                     color: "text.secondary",
-                                    "&:hover": { color: theme.palette.primary.light },
+                                    "&:hover": {
+                                        color: theme.palette.primary.light,
+                                    },
                                 }}
                             >
                                 {link.label}
@@ -99,14 +110,22 @@ function Navbar() {
                     </Box>
 
                     {/* ── Desktop phone ──────────────────────────────── */}
-                    <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 3 }}>
+                    <Box
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            alignItems: "center",
+                            gap: 3,
+                        }}
+                    >
                         <Box
                             component="a"
                             href="tel:+13235109665"
                             className="nav-phone-link"
                             sx={{
                                 color: "text.primary",
-                                "&:hover": { color: theme.palette.primary.light },
+                                "&:hover": {
+                                    color: theme.palette.primary.light,
+                                },
                             }}
                         >
                             <PhoneIcon sx={{ fontSize: "1rem" }} />
@@ -145,7 +164,11 @@ function Navbar() {
             >
                 {/* Close button */}
                 <Box className="nav-drawer-close">
-                    <IconButton onClick={closeMobile} sx={{ color: "text.primary" }} aria-label="close menu">
+                    <IconButton
+                        onClick={closeMobile}
+                        sx={{ color: "text.primary" }}
+                        aria-label="close menu"
+                    >
                         <CloseIcon />
                     </IconButton>
                 </Box>
@@ -164,7 +187,8 @@ function Navbar() {
                                     <ListItemText
                                         primary={link.label}
                                         primaryTypographyProps={{
-                                            fontFamily: theme.typography.h4.fontFamily,
+                                            fontFamily:
+                                                theme.typography.h4.fontFamily,
                                             fontSize: "2rem",
                                             color: "text.primary",
                                         }}
@@ -176,15 +200,17 @@ function Navbar() {
                     ))}
                 </List>
 
-                {/* Mobile phone */}
-                <Box className="nav-mobile-actions">
+                {/* Mobile phone — col-list provides the flex column + 16px gap */}
+                <Box className="nav-mobile-actions col-list">
                     <Box
                         component="a"
                         href="tel:+13235109665"
                         className="nav-mobile-phone"
                         sx={{ color: "text.primary" }}
                     >
-                        <PhoneIcon sx={{ color: "primary.main", fontSize: "1.25rem" }} />
+                        <PhoneIcon
+                            sx={{ color: "primary.main", fontSize: "1.25rem" }}
+                        />
                         (323) 510-9665
                     </Box>
                 </Box>

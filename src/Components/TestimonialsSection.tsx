@@ -41,11 +41,11 @@ function TestimonialsSection() {
         >
             <Container maxWidth="lg">
                 {/* ── Header ─────────────────────────────────────────── */}
-                <Box sx={{ textAlign: "center", mb: 8 }}>
+                <Box className="section-header" sx={{ mb: 8 }}>
                     <Typography
                         variant="subtitle2"
+                        className="section-eyebrow"
                         data-aos="fade-up"
-                        sx={{ mb: 2, display: "block" }}
                     >
                         Client Reviews
                     </Typography>
@@ -86,7 +86,7 @@ function TestimonialsSection() {
                         >
                             <CardContent sx={{ p: 3 }}>
                                 {/* 5 stars */}
-                                <Box sx={{ display: "flex", gap: 0.5, mb: 3 }}>
+                                <Box className="testimonial-stars">
                                     {[...Array(5)].map((_, i) => (
                                         <StarIcon
                                             key={i}
@@ -101,10 +101,9 @@ function TestimonialsSection() {
                                 {/* Quote */}
                                 <Typography
                                     variant="body1"
+                                    className="testimonial-quote"
                                     sx={{
-                                        fontStyle: "italic",
                                         mb: 4,
-                                        lineHeight: 1.75,
                                         color: "text.primary",
                                         fontSize: { xs: "0.95rem", md: "1rem" },
                                     }}
@@ -115,10 +114,10 @@ function TestimonialsSection() {
                                 {/* Attribution */}
                                 <Box>
                                     <Typography
+                                        className="testimonial-name"
                                         sx={{
                                             fontFamily:
                                                 theme.typography.h4.fontFamily,
-                                            fontSize: "1.2rem",
                                             color: "text.primary",
                                         }}
                                     >
