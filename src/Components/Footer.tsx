@@ -35,7 +35,7 @@ function Footer() {
                             sm: "1fr 1fr",
                             md: "2fr 1fr 1fr",
                         },
-                        gap: { xs: 5, md: 6 },
+                        gap: { xs: 5, md: 20 },
                         mb: 8,
                     }}
                 >
@@ -143,7 +143,7 @@ function Footer() {
                                 color: "text.primary",
                             }}
                         >
-                            Follow Us
+                            Socials
                         </Typography>
                         <Box sx={{ display: "flex", gap: 1.5 }}>
                             <Link
@@ -160,6 +160,7 @@ function Footer() {
                                 }}
                             >
                                 <ReviewsIcon fontSize="small" />
+                                Yelp
                             </Link>
                         </Box>
                     </Box>
