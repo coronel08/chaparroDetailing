@@ -2,12 +2,12 @@ import { createTheme } from "@mui/material";
 
 // ── Design tokens from the mockup ──────────────────────────────────────────
 export const COLORS = {
-    obsidian: "#0a0a0a", // deepest background
-    charcoal: "#121212", // secondary background / card surfaces
+    obsidian: "#0d1117", // deepest background
+    charcoal: "#141d2b", // secondary background / card surfaces
     amber: "#f99600", // primary accent (buttons, highlights, icons)
     blue: "#126baf",
     amberLight: "#ffb51b", // hover amber
-    blueLight: "#3db8f5", // hover blue
+    blueLight: "#1a8ad4", // hover blue
     zinc50: "#fafafa",
     zinc100: "#f4f4f5", // primary text
     zinc300: "#d4d4d8",
