@@ -58,7 +58,7 @@ function Navbar() {
                 <Toolbar
                     sx={{
                         maxWidth: "1280px",
-                        width: "100%",
+                        width: "90%",
                         mx: "auto",
                         px: { xs: 2, sm: 3 },
                         justifyContent: "space-between",
