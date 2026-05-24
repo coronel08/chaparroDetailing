@@ -1,7 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function HeroSection() {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     return (
         <Box
@@ -47,7 +49,7 @@ function HeroSection() {
                         data-aos="fade-up"
                         data-aos-delay="200"
                     >
-                        Premium Automotive Care
+                        {t("hero.eyebrow")}
                     </Typography>
 
                     {/* Main heading */}
@@ -57,10 +59,10 @@ function HeroSection() {
                         data-aos-delay="300"
                         sx={{ mb: 3 }}
                     >
-                        Showroom shine.
+                        {t("hero.headline1")}
                         <br />
                         <Box component="span" sx={{ color: "text.secondary" }}>
-                            Every time.
+                            {t("hero.headline2")}
                         </Box>
                     </Typography>
 
@@ -72,10 +74,9 @@ function HeroSection() {
                         data-aos-delay="400"
                         sx={{ mb: 5, fontSize: { xs: "1rem", md: "1.125rem" } }}
                     >
-                        Meticulous detailing, paint correction, and ceramic
-                        coating delivered to you on your time.
+                        {t("hero.body1")}
                         <br />
-                        Mobile Detailing at an affordable price.
+                        {t("hero.body2")}
                     </Typography>
                 </Box>
             </Box>

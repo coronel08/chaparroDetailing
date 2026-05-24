@@ -1,5 +1,6 @@
 import { Box, Container, Typography, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 const images = [
     {
@@ -31,6 +32,7 @@ const images = [
 
 function GallerySection() {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     return (
         <Box
@@ -55,9 +57,11 @@ function GallerySection() {
                             variant="subtitle2"
                             className="section-eyebrow"
                         >
-                            Our Work
+                            {t("gallery.eyebrow")}
                         </Typography>
-                        <Typography variant="h2">The Gallery</Typography>
+                        <Typography variant="h2">
+                            {t("gallery.heading")}
+                        </Typography>
                     </Box>
                 </Box>
 
@@ -72,7 +76,6 @@ function GallerySection() {
                             key={index}
                             className={`gallery-item ${img.className}`}
                             sx={{
-                                // Overlay tint uses theme colour — rest handled in CSS
                                 "& .gallery-overlay": {
                                     background: alpha(
                                         theme.palette.background.default,
@@ -85,7 +88,6 @@ function GallerySection() {
                             }}
                         >
                             <Box className="gallery-overlay" />
-                            {/* No sx needed — .gallery-item img in CSS covers everything */}
                             <Box component="img" src={img.url} alt={img.alt} />
                         </Box>
                     ))}

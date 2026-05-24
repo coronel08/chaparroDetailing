@@ -11,9 +11,11 @@ import PlaceIcon from "@mui/icons-material/Place";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { alpha } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     return (
         <Box
@@ -62,12 +64,10 @@ function Footer() {
                             variant="body2"
                             sx={{ lineHeight: 1.8, maxWidth: "460px" }}
                         >
-                            Premium automotive detailing, paint correction, and
-                            ceramic coating services delivered to you.
+                            {t("footer.tagline1")}
                             <br />
                             <br />
-                            Years of expertise and over hundreds of satisfied
-                            customers.
+                            {t("footer.tagline2")}
                         </Typography>
                     </Box>
 
@@ -80,9 +80,8 @@ function Footer() {
                                 color: "text.primary",
                             }}
                         >
-                            Contact
+                            {t("footer.contact")}
                         </Typography>
-                        {/* col-list provides flex-direction: column + 16px gap */}
                         <Box className="col-list">
                             <Box className="footer-contact-row">
                                 <AccessTimeIcon
@@ -94,7 +93,7 @@ function Footer() {
                                     }}
                                 />
                                 <Typography variant="body2">
-                                    Same day appointments available
+                                    {t("footer.sameDay")}
                                 </Typography>
                             </Box>
                             <Box className="footer-contact-row">
@@ -107,7 +106,7 @@ function Footer() {
                                     }}
                                 />
                                 <Typography variant="body2">
-                                    Serving the greater Los Angeles area
+                                    {t("footer.serving")}
                                 </Typography>
                             </Box>
                             <Box className="footer-contact-row footer-contact-row--center">
@@ -134,7 +133,7 @@ function Footer() {
                         </Box>
                     </Box>
 
-                    {/* Follow */}
+                    {/* Socials */}
                     <Box>
                         <Typography
                             className="footer-section-heading"
@@ -143,7 +142,7 @@ function Footer() {
                                 color: "text.primary",
                             }}
                         >
-                            Socials
+                            {t("footer.socials")}
                         </Typography>
                         <Box sx={{ display: "flex", gap: 1.5 }}>
                             <Link
@@ -151,7 +150,10 @@ function Footer() {
                                 aria-label="Read our Yelp reviews"
                                 className="footer-social-btn"
                                 sx={{
-                                    bgcolor: alpha(theme.palette.divider, 0.4),
+                                    bgcolor: alpha(
+                                        theme.palette.divider,
+                                        0.4,
+                                    ),
                                     color: "text.secondary",
                                     "&:hover": {
                                         bgcolor: "primary.main",

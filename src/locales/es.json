@@ -1,0 +1,73 @@
+{
+    "nav": {
+        "process": "Proceso",
+        "gallery": "Galería"
+    },
+    "hero": {
+        "eyebrow": "Cuidado Automotriz Premium",
+        "headline1": "Brillo de showroom.",
+        "headline2": "Siempre.",
+        "body1": "Detallado meticuloso, corrección de pintura y recubrimiento cerámico a domicilio, a tu horario.",
+        "body2": "Detallado móvil a un precio accesible."
+    },
+    "process": {
+        "eyebrow": "Cómo Funciona",
+        "heading": "El Proceso Chaparro",
+        "steps": [
+            {
+                "title": "1. Cita",
+                "description": "Agenda tu cita. Nosotros vamos a ti."
+            },
+            {
+                "title": "2. Inspección",
+                "description": "Realizamos una inspección detallada contigo para identificar áreas de atención y definir expectativas del trabajo."
+            },
+            {
+                "title": "3. Detallado",
+                "description": "Nuestro proceso meticuloso comienza. Usamos productos premium y técnicas probadas para restaurar tu vehículo."
+            },
+            {
+                "title": "4. Listo",
+                "description": "Inspección final y recorrido. Te entregamos las llaves de un vehículo que luce mejor que nuevo."
+            }
+        ]
+    },
+    "gallery": {
+        "eyebrow": "Nuestro Trabajo",
+        "heading": "La Galería"
+    },
+    "testimonials": {
+        "eyebrow": "Reseñas de Clientes",
+        "heading": "De Boca en Boca",
+        "items": [
+            {
+                "quote": "Un trabajo absolutamente increíble. La corrección de pintura sacó una profundidad en la pintura negra que no sabía que existía. El recubrimiento cerámico hace que lavarlo sea muy fácil.",
+                "name": "Sarah T.",
+                "vehicle": "Toyota Corolla LX"
+            },
+            {
+                "quote": "Lograron quitar manchas de aceite en mi camioneta de trabajo que pensé eran permanentes. El interior luce y huele como si acabara de salir del piso de ventas.",
+                "name": "Michael L.",
+                "vehicle": "Ford F-250"
+            },
+            {
+                "quote": "Profesionales, meticulosos y verdaderamente apasionados por lo que hacen. Chaparro es el único lugar en el que confío mis vehículos. Vale cada centavo.",
+                "name": "David R.",
+                "vehicle": "BMW M3"
+            }
+        ]
+    },
+    "cta": {
+        "heading": "¿Listo para hacerlo brillar?",
+        "body": "Agenda tu cita hoy y experimenta lo mejor del cuidado automotriz. Nuestro horario se llena rápido.",
+        "call": "Llamar (323) 510-9665"
+    },
+    "footer": {
+        "tagline1": "Servicios de detallado automotriz premium, corrección de pintura y recubrimiento cerámico a domicilio.",
+        "tagline2": "Años de experiencia y cientos de clientes satisfechos.",
+        "contact": "Contacto",
+        "sameDay": "Citas disponibles el mismo día",
+        "serving": "Servicio en el área metropolitana de Los Ángeles",
+        "socials": "Redes Sociales"
+    }
+}

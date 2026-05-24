@@ -1,9 +1,11 @@
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import PhoneIcon from "@mui/icons-material/Phone";
+import { useTranslation } from "react-i18next";
 
 function BookingCTA() {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     return (
         <Box
@@ -16,7 +18,7 @@ function BookingCTA() {
                 overflow: "hidden",
             }}
         >
-            {/* Radial glow — only the theme colour stays in sx */}
+            {/* Radial glow */}
             <Box
                 className="cta-glow"
                 sx={{ background: alpha(theme.palette.primary.main, 0.05) }}
@@ -31,7 +33,7 @@ function BookingCTA() {
                             fontSize: { xs: "2.5rem", md: "4rem", lg: "5rem" },
                         }}
                     >
-                        Ready to make it shine?
+                        {t("cta.heading")}
                     </Typography>
 
                     <Typography
@@ -44,8 +46,7 @@ function BookingCTA() {
                             fontSize: { xs: "1rem", md: "1.125rem" },
                         }}
                     >
-                        Book your appointment today and experience the pinnacle
-                        of automotive care. Our schedule fills up quickly.
+                        {t("cta.body")}
                     </Typography>
 
                     <Box
@@ -76,29 +77,8 @@ function BookingCTA() {
                                 },
                             }}
                         >
-                            Call (323) 510-9665
+                            {t("cta.call")}
                         </Button>
-
-                        {/* Book online button */}
-                        {/* <Button
-                            component="a"
-                            href="#"
-                            variant="contained"
-                            color="primary"
-                            disableElevation
-                            startIcon={<CalendarMonthIcon />}
-                            sx={{
-                                width: { xs: "100%", sm: "auto" },
-                                px: 4,
-                                py: 1.75,
-                                fontSize: "1rem",
-                                "&:hover": {
-                                    boxShadow: `0 0 20px ${alpha(theme.palette.primary.main, 0.3)}`,
-                                },
-                            }}
-                        >
-                            Book Online
-                        </Button> */}
                     </Box>
                 </Box>
             </Container>

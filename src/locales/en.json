@@ -1,0 +1,73 @@
+{
+    "nav": {
+        "process": "Process",
+        "gallery": "Gallery"
+    },
+    "hero": {
+        "eyebrow": "Premium Automotive Care",
+        "headline1": "Showroom shine.",
+        "headline2": "Every time.",
+        "body1": "Meticulous detailing, paint correction, and ceramic coating delivered to you on your time.",
+        "body2": "Mobile Detailing at an affordable price."
+    },
+    "process": {
+        "eyebrow": "How It Works",
+        "heading": "The Chaparro Process",
+        "steps": [
+            {
+                "title": "1. Book",
+                "description": "Schedule your appointment. We come to you."
+            },
+            {
+                "title": "2. Inspect",
+                "description": "We perform a thorough walk-around with you to identify specific areas of concern and set expectations for the work."
+            },
+            {
+                "title": "3. Detail",
+                "description": "Our meticulous process begins. We use premium products and proven techniques to restore your vehicle."
+            },
+            {
+                "title": "4. Complete",
+                "description": "Final inspection and walk-through. We hand back the keys to a vehicle that looks better than new."
+            }
+        ]
+    },
+    "gallery": {
+        "eyebrow": "Our Work",
+        "heading": "The Gallery"
+    },
+    "testimonials": {
+        "eyebrow": "Client Reviews",
+        "heading": "Word of Mouth",
+        "items": [
+            {
+                "quote": "Absolutely incredible work. The paint correction brought out a depth in the black paint I didn't know existed. The ceramic coating makes washing it a breeze.",
+                "name": "Sarah T.",
+                "vehicle": "Toyota Corolla LX"
+            },
+            {
+                "quote": "They managed to get out oil stains in my work truck that I thought were permanent. The interior looks and smells like it just rolled off the showroom floor.",
+                "name": "Michael L.",
+                "vehicle": "Ford F-250"
+            },
+            {
+                "quote": "Professional, meticulous, and truly passionate about what they do. Chaparro is the only place I trust with my vehicles. Worth every penny.",
+                "name": "David R.",
+                "vehicle": "BMW M3"
+            }
+        ]
+    },
+    "cta": {
+        "heading": "Ready to make it shine?",
+        "body": "Book your appointment today and experience the pinnacle of automotive care. Our schedule fills up quickly.",
+        "call": "Call (323) 510-9665"
+    },
+    "footer": {
+        "tagline1": "Premium automotive detailing, paint correction, and ceramic coating services delivered to you.",
+        "tagline2": "Years of expertise and over hundreds of satisfied customers.",
+        "contact": "Contact",
+        "sameDay": "Same day appointments available",
+        "serving": "Serving the greater Los Angeles area",
+        "socials": "Socials"
+    }
+}

@@ -8,27 +8,15 @@ import {
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import StarIcon from "@mui/icons-material/Star";
-
-const testimonials = [
-    {
-        name: "Sarah T.",
-        vehicle: "Toyota Corolla LX",
-        quote: "Absolutely incredible work. The paint correction brought out a depth in the black paint I didn't know existed. The ceramic coating makes washing it a breeze.",
-    },
-    {
-        name: "Michael L.",
-        vehicle: "Ford F-250",
-        quote: "They managed to get out oil stains in my work truck that I thought were permanent. The interior looks and smells like it just rolled off the showroom floor.",
-    },
-    {
-        name: "David R.",
-        vehicle: "BMW M3",
-        quote: "Professional, meticulous, and truly passionate about what they do. Chaparro is the only place I trust with my vehicles. Worth every penny.",
-    },
-];
+import { useTranslation } from "react-i18next";
 
 function TestimonialsSection() {
     const theme = useTheme();
+    const { t } = useTranslation();
+
+    const testimonials = t("testimonials.items", {
+        returnObjects: true,
+    }) as { quote: string; name: string; vehicle: string }[];
 
     return (
         <Box
@@ -47,14 +35,14 @@ function TestimonialsSection() {
                         className="section-eyebrow"
                         data-aos="fade-up"
                     >
-                        Client Reviews
+                        {t("testimonials.eyebrow")}
                     </Typography>
                     <Typography
                         variant="h2"
                         data-aos="fade-up"
                         data-aos-delay="100"
                     >
-                        Word of Mouth
+                        {t("testimonials.heading")}
                     </Typography>
                 </Box>
 
@@ -69,7 +57,7 @@ function TestimonialsSection() {
                         gap: 3,
                     }}
                 >
-                    {testimonials.map((t, index) => (
+                    {testimonials.map((item, index) => (
                         <Card
                             key={index}
                             data-aos="fade-up"
@@ -105,10 +93,13 @@ function TestimonialsSection() {
                                     sx={{
                                         mb: 4,
                                         color: "text.primary",
-                                        fontSize: { xs: "0.95rem", md: "1rem" },
+                                        fontSize: {
+                                            xs: "0.95rem",
+                                            md: "1rem",
+                                        },
                                     }}
                                 >
-                                    "{t.quote}"
+                                    "{item.quote}"
                                 </Typography>
 
                                 {/* Attribution */}
@@ -121,13 +112,16 @@ function TestimonialsSection() {
                                             color: "text.primary",
                                         }}
                                     >
-                                        {t.name}
+                                        {item.name}
                                     </Typography>
                                     <Typography
                                         variant="body2"
-                                        sx={{ color: "text.disabled", mt: 0.5 }}
+                                        sx={{
+                                            color: "text.disabled",
+                                            mt: 0.5,
+                                        }}
                                     >
-                                        {t.vehicle}
+                                        {item.vehicle}
                                     </Typography>
                                 </Box>
                             </CardContent>

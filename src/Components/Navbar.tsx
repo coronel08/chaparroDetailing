@@ -16,16 +16,24 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import PhoneIcon from "@mui/icons-material/Phone";
-
-const navLinks = [
-    { label: "Process", href: "#process" },
-    { label: "Gallery", href: "#gallery" },
-];
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
     const theme = useTheme();
+    const { t, i18n } = useTranslation();
     const [scrolled, setScrolled] = React.useState(false);
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const navLinks = [
+        { label: t("nav.process"), href: "#process" },
+        { label: t("nav.gallery"), href: "#gallery" },
+    ];
+
+    const toggleLang = () => {
+        const next = i18n.language === "en" ? "es" : "en";
+        i18n.changeLanguage(next);
+        localStorage.setItem("lang", next);
+    };
 
     React.useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -93,7 +101,7 @@ function Navbar() {
                     >
                         {navLinks.map((link) => (
                             <Box
-                                key={link.label}
+                                key={link.href}
                                 component="a"
                                 href={link.href}
                                 className="nav-link"
@@ -109,7 +117,7 @@ function Navbar() {
                         ))}
                     </Box>
 
-                    {/* ── Desktop phone ──────────────────────────────── */}
+                    {/* ── Desktop right: phone + lang toggle ─────────── */}
                     <Box
                         sx={{
                             display: { xs: "none", md: "flex" },
@@ -130,6 +138,33 @@ function Navbar() {
                         >
                             <PhoneIcon sx={{ fontSize: "1rem" }} />
                             (323) 510-9665
+                        </Box>
+
+                        {/* Language toggle */}
+                        <Box
+                            component="button"
+                            onClick={toggleLang}
+                            sx={{
+                                background: "none",
+                                border: `1px solid ${theme.palette.divider}`,
+                                borderRadius: "2px",
+                                color: "text.secondary",
+                                cursor: "pointer",
+                                fontFamily: theme.typography.button.fontFamily,
+                                fontSize: "0.75rem",
+                                fontWeight: 600,
+                                letterSpacing: "0.08em",
+                                px: 1.5,
+                                py: 0.5,
+                                textTransform: "uppercase",
+                                transition: "color 0.2s, border-color 0.2s",
+                                "&:hover": {
+                                    color: theme.palette.primary.light,
+                                    borderColor: theme.palette.primary.light,
+                                },
+                            }}
+                        >
+                            {i18n.language === "en" ? "ES" : "EN"}
                         </Box>
                     </Box>
 
@@ -176,7 +211,7 @@ function Navbar() {
                 {/* Mobile nav links */}
                 <List disablePadding>
                     {navLinks.map((link) => (
-                        <React.Fragment key={link.label}>
+                        <React.Fragment key={link.href}>
                             <ListItem disablePadding>
                                 <ListItemButton
                                     component="a"
@@ -200,7 +235,7 @@ function Navbar() {
                     ))}
                 </List>
 
-                {/* Mobile phone — col-list provides the flex column + 16px gap */}
+                {/* Mobile phone + lang toggle */}
                 <Box className="nav-mobile-actions col-list">
                     <Box
                         component="a"
@@ -212,6 +247,29 @@ function Navbar() {
                             sx={{ color: "primary.main", fontSize: "1.25rem" }}
                         />
                         (323) 510-9665
+                    </Box>
+
+                    {/* Mobile language toggle */}
+                    <Box
+                        component="button"
+                        onClick={toggleLang}
+                        sx={{
+                            alignSelf: "flex-start",
+                            background: "none",
+                            border: `1px solid ${theme.palette.divider}`,
+                            borderRadius: "2px",
+                            color: "text.secondary",
+                            cursor: "pointer",
+                            fontFamily: theme.typography.button.fontFamily,
+                            fontSize: "0.8rem",
+                            fontWeight: 600,
+                            letterSpacing: "0.08em",
+                            px: 2,
+                            py: 0.75,
+                            textTransform: "uppercase",
+                        }}
+                    >
+                        {i18n.language === "en" ? "Español" : "English"}
                     </Box>
                 </Box>
             </Drawer>

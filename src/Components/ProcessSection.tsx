@@ -4,35 +4,24 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import SearchIcon from "@mui/icons-material/Search";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import { useTranslation } from "react-i18next";
+import type { SvgIconComponent } from "@mui/icons-material";
 
-const steps = [
-    {
-        icon: CalendarMonthIcon,
-        title: "1. Book",
-        description: "Schedule your appointment. We come to you.",
-    },
-    {
-        icon: SearchIcon,
-        title: "2. Inspect",
-        description:
-            "We perform a thorough walk-around with you to identify specific areas of concern and set expectations for the work.",
-    },
-    {
-        icon: AutoAwesomeIcon,
-        title: "3. Detail",
-        description:
-            "Our meticulous process begins. We use premium products and proven techniques to restore your vehicle.",
-    },
-    {
-        icon: VpnKeyIcon,
-        title: "4. Complete",
-        description:
-            "Final inspection and walk-through. We hand back the keys to a vehicle that looks better than new.",
-    },
+const stepIcons: SvgIconComponent[] = [
+    CalendarMonthIcon,
+    SearchIcon,
+    AutoAwesomeIcon,
+    VpnKeyIcon,
 ];
 
 function ProcessSection() {
     const theme = useTheme();
+    const { t } = useTranslation();
+
+    const steps = t("process.steps", { returnObjects: true }) as {
+        title: string;
+        description: string;
+    }[];
 
     return (
         <Box
@@ -52,14 +41,14 @@ function ProcessSection() {
                         className="section-eyebrow"
                         data-aos="fade-up"
                     >
-                        How It Works
+                        {t("process.eyebrow")}
                     </Typography>
                     <Typography
                         variant="h2"
                         data-aos="fade-up"
                         data-aos-delay="100"
                     >
-                        The Chaparro Process
+                        {t("process.heading")}
                     </Typography>
                 </Box>
 
@@ -79,15 +68,15 @@ function ProcessSection() {
                     <Box className="process-connector" />
 
                     {steps.map((step, index) => {
-                        const Icon = step.icon;
+                        const Icon = stepIcons[index];
                         return (
                             <Box
-                                key={step.title}
+                                key={index}
                                 className="process-step"
                                 data-aos="fade-up"
                                 data-aos-delay={index * 120}
                             >
-                                {/* Icon circle — only theme colours stay in sx */}
+                                {/* Icon circle */}
                                 <Box
                                     className="process-icon-circle"
                                     sx={{
