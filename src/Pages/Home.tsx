@@ -24,19 +24,19 @@ function Home() {
             </Helmet>
 
             {/* ── Hero ─────────────────────────────────────────────────── */}
-            <HeroSection />
+            {/* <HeroSection /> */}
 
             {/* ── How it works ─────────────────────────────────────────── */}
             <ProcessSection />
 
             {/* ── Gallery ──────────────────────────────────────────────── */}
-            <GallerySection />
+            {/* <GallerySection /> */}
 
             {/* ── Book Now CTA ─────────────────────────────────────────── */}
-            <BookingCTA />
+            {/* <BookingCTA /> */}
 
             {/* ── Testimonials ─────────────────────────────────────────── */}
-            <TestimonialsSection />
+            {/* <TestimonialsSection /> */}
         </>
     );
 }
