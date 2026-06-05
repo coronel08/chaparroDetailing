@@ -1,9 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import HeroSection from "../Components/HeroSection";
 import ProcessSection from "../Components/ProcessSection";
-import GallerySection from "../Components/GallerySection";
-import BookingCTA from "../Components/BookingCTA";
-import TestimonialsSection from "../Components/TestimonialsSection";
 
 function Home() {
     return (
