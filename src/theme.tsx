@@ -8,6 +8,7 @@ export const COLORS = {
     blue: "#126baf",
     amberLight: "#ffb51b", // hover amber
     blueLight: "#1a8ad4", // hover blue
+    sunnyYellow: "#FDD20B",
     zinc50: "#fafafa",
     zinc100: "#f4f4f5", // primary text
     zinc300: "#d4d4d8",
@@ -23,7 +24,7 @@ const theme = createTheme({
     palette: {
         mode: "dark",
         primary: {
-            main: COLORS.blue,
+            main: COLORS.sunnyYellow,
             light: COLORS.blueLight,
             dark: "#cc6f00",
             contrastText: COLORS.obsidian, // dark text on amber buttons
@@ -96,7 +97,7 @@ const theme = createTheme({
         body2: {
             fontFamily: "'Inter', system-ui, sans-serif",
             color: COLORS.zinc400,
-            fontSize: "0.875rem",
+            fontSize: "0.975rem",
         },
         subtitle1: {
             fontFamily: "'Inter', system-ui, sans-serif",
@@ -104,7 +105,7 @@ const theme = createTheme({
         },
         subtitle2: {
             fontFamily: "'Inter', system-ui, sans-serif",
-            color: COLORS.blue,
+            color: COLORS.sunnyYellow,
             fontWeight: 600,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
@@ -127,7 +128,7 @@ const theme = createTheme({
                     fontWeight: 600,
                 },
                 containedPrimary: {
-                    backgroundColor: COLORS.blue,
+                    backgroundColor: COLORS.sunnyYellow,
                     color: COLORS.obsidian,
                     "&:hover": {
                         backgroundColor: COLORS.blueLight,

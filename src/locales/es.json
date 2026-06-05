@@ -4,31 +4,31 @@
         "gallery": "Galería"
     },
     "hero": {
-        "eyebrow": "Cuidado Automotriz Premium",
-        "headline1": "Brillo de showroom.",
+        "eyebrow": "Gestión Premium de Llaves",
+        "headline1": "Control total.",
         "headline2": "Siempre.",
-        "body1": "Detallado meticuloso, corrección de pintura y recubrimiento cerámico a domicilio, a tu horario.",
-        "body2": "Detallado móvil a un precio accesible."
+        "body1": "Seguimiento meticuloso, registro y entrega de llaves cuando lo necesites.",
+        "body2": "Biblioteca de llaves Hertz a un precio accesible."
     },
     "process": {
         "eyebrow": "Cómo Funciona",
-        "heading": "El Proceso Chaparro",
+        "heading": "El Proceso",
         "steps": [
             {
-                "title": "1. Cita",
-                "description": "Agenda tu cita. Nosotros vamos a ti."
+                "title": "1. Escanear",
+                "description": "Escanea la llave."
             },
             {
-                "title": "2. Inspección",
-                "description": "Realizamos una inspección detallada contigo para identificar áreas de atención y definir expectativas del trabajo."
+                "title": "2. Registrar",
+                "description": "Agrega la información del registro."
             },
             {
-                "title": "3. Detallado",
-                "description": "Nuestro proceso meticuloso comienza. Usamos productos premium y técnicas probadas para restaurar tu vehículo."
+                "title": "3. Contactar",
+                "description": "Las interacciones programadas regularmente mantienen las llaves en el lugar correcto."
             },
             {
-                "title": "4. Listo",
-                "description": "Inspección final y recorrido. Te entregamos las llaves de un vehículo que luce mejor que nuevo."
+                "title": "4. Completar",
+                "description": "Entrega de la llave."
             }
         ]
     },
@@ -51,22 +51,22 @@
                 "vehicle": "Ford F-250"
             },
             {
-                "quote": "Profesionales, meticulosos y verdaderamente apasionados por lo que hacen. Chaparro es el único lugar en el que confío mis vehículos. Vale cada centavo.",
+                "quote": "Profesionales, meticulosos y verdaderamente apasionados por lo que hacen. Vale cada centavo.",
                 "name": "David R.",
                 "vehicle": "BMW M3"
             }
         ]
     },
     "cta": {
-        "heading": "¿Listo para hacerlo brillar?",
-        "body": "Agenda tu cita hoy y experimenta lo mejor del cuidado automotriz. Nuestro horario se llena rápido.",
-        "call": "Llamar (323) 510-9665"
+        "heading": "¿Listo para empezar?",
+        "body": "Registra tus llaves hoy y mantén todo bajo control. Disponible cuando lo necesites.",
+        "call": ""
     },
     "footer": {
-        "tagline1": "Servicios de detallado automotriz premium, corrección de pintura y recubrimiento cerámico a domicilio.",
-        "tagline2": "Años de experiencia y cientos de clientes satisfechos.",
+        "tagline1": "Herramienta creada con la intención de resolver problemas de llaves.",
+        "tagline2": "",
         "contact": "Contacto",
-        "sameDay": "Citas disponibles el mismo día",
+        "sameDay": "Disponible el mismo día",
         "serving": "Servicio en el área metropolitana de Los Ángeles",
         "socials": "Redes Sociales"
     }

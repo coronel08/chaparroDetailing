@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import {
     Box,
     Button,
@@ -15,29 +15,46 @@ import {
     type SelectChangeEvent,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import SearchIcon from "@mui/icons-material/Search";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-import CloseIcon from "@mui/icons-material/Close";
+import {
+    CalendarMonth,
+    Search,
+    AutoAwesome,
+    VpnKey,
+    QrCodeScanner,
+    Close,
+    type SvgIconComponent,
+} from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import type { SvgIconComponent } from "@mui/icons-material";
 import { Html5Qrcode } from "html5-qrcode";
+
 import LocationsMap from "./LocationsMap";
+import CheckInsTable from "./CheckInsTable";
+import { createCheckIn, getCheckIns, type CheckIn } from "../api/checkins";
+import { HEX_COLORS, LOCATIONS, CAR_MAKES } from "../constants";
 
 const stepIcons: SvgIconComponent[] = [
-    CalendarMonthIcon,
-    SearchIcon,
-    AutoAwesomeIcon,
-    VpnKeyIcon,
+    CalendarMonth,
+    Search,
+    AutoAwesome,
+    VpnKey,
 ];
 
-const LOCATIONS = [
-    { value: "loc-1", label: "Location 1" },
-    { value: "loc-2", label: "Location 2" },
-    { value: "loc-3", label: "Location 3" },
-];
+// ── Shared fetch state for check-ins ────────────────────────────────────────
+type FetchState =
+    | { status: "loading" }
+    | { status: "error"; error: string }
+    | { status: "ok"; rows: CheckIn[] };
+
+type FetchAction =
+    | { type: "fetch" }
+    | { type: "success"; rows: CheckIn[] }
+    | { type: "error"; error: string };
+
+function fetchReducer(_: FetchState, action: FetchAction): FetchState {
+    if (action.type === "fetch") return { status: "loading" };
+    if (action.type === "success") return { status: "ok", rows: action.rows };
+    return { status: "error", error: action.error };
+}
 
 const SCANNER_ID = "inline-qr-region";
 
@@ -48,8 +65,37 @@ function ProcessSection() {
     // ── Check-in form state ──────────────────────────────────────────────
     const [code, setCode] = useState("");
     const [location, setLocation] = useState("");
+    const [vehicleNumber, setVehicleNumber] = useState("");
+    const [licensePlate, setLicensePlate] = useState("");
+    const [vinNumber, setVinNumber] = useState("");
+    const [carMake, setCarMake] = useState("");
+    const [carColor, setCarColor] = useState("");
     const [scanning, setScanning] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+    const [refreshKey, setRefreshKey] = useState(0);
     const scannerRef = useRef<Html5Qrcode | null>(null);
+
+    // ── Single shared fetch ────────────────────────────────────────────
+    const [fetchState, dispatch] = useReducer(fetchReducer, {
+        status: "loading",
+    });
+
+    const fetchCheckIns = useCallback(() => {
+        dispatch({ type: "fetch" });
+        getCheckIns()
+            .then((rows) => dispatch({ type: "success", rows }))
+            .catch((e: Error) => dispatch({ type: "error", error: e.message }));
+    }, []);
+
+    useEffect(() => {
+        fetchCheckIns();
+    }, [fetchCheckIns, refreshKey]);
+
+    const checkInRows = fetchState.status === "ok" ? fetchState.rows : [];
+    const checkInLoading = fetchState.status === "loading";
+    const checkInError =
+        fetchState.status === "error" ? fetchState.error : null;
 
     const stopScanner = async () => {
         try {
@@ -105,11 +151,44 @@ function ProcessSection() {
         }
     };
 
-    const handleSubmit = () => {
-        console.log("Check-in submitted:", { code, location });
+    const handleSubmit = async () => {
+        setSubmitting(true);
+        setSubmitError(null);
+        try {
+            await createCheckIn({
+                location,
+                ...(code && { code }),
+                ...(vehicleNumber && { vehicleNumber }),
+                ...(licensePlate && { licensePlate }),
+                ...(vinNumber && { vinNumber }),
+                ...(carMake && { carMake }),
+                ...(carColor && { carColor }),
+            });
+            // Reset form & refresh table
+            setCode("");
+            setVehicleNumber("");
+            setLicensePlate("");
+            setVinNumber("");
+            setLocation("");
+            setCarMake("");
+            setCarColor("");
+            setRefreshKey((k) => k + 1);
+        } catch (e: unknown) {
+            setSubmitError(
+                e instanceof Error ? e.message : "Submission failed.",
+            );
+        } finally {
+            setSubmitting(false);
+        }
     };
 
-    const canSubmit = code.trim() !== "" && location !== "";
+    // Location is always required + at least one identifier
+    const canSubmit =
+        location !== "" &&
+        (code.trim() !== "" ||
+            vehicleNumber.trim() !== "" ||
+            licensePlate.trim() !== "" ||
+            vinNumber.trim() !== "");
 
     const steps = t("process.steps", { returnObjects: true }) as {
         title: string;
@@ -226,6 +305,14 @@ function ProcessSection() {
                         Check In
                     </Typography>
 
+                    <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", pb: 4 }}
+                    >
+                        Submit with at least one unique identifier and tag the
+                        key with a location.
+                    </Typography>
+
                     {/* Inline camera — only rendered when scanning */}
                     {scanning && (
                         <Box
@@ -281,16 +368,16 @@ function ProcessSection() {
                                 }}
                             >
                                 {scanning ? (
-                                    <CloseIcon fontSize="small" />
+                                    <Close fontSize="small" />
                                 ) : (
-                                    <QrCodeScannerIcon fontSize="small" />
+                                    <QrCodeScanner fontSize="small" />
                                 )}
                             </IconButton>
                         </Tooltip>
 
                         {/* Code text input */}
                         <TextField
-                            label="Code"
+                            label="Code TBA"
                             variant="outlined"
                             size="small"
                             value={code}
@@ -304,6 +391,54 @@ function ProcessSection() {
                                     borderRadius: "2px",
                                 },
                             }}
+                        />
+
+                        {/* Vehicle number */}
+                        <TextField
+                            label="Vehicle #"
+                            variant="outlined"
+                            size="small"
+                            value={vehicleNumber}
+                            onChange={(e) => setVehicleNumber(e.target.value)}
+                            placeholder="e.g. VH-001"
+                            sx={{
+                                minWidth: { xs: "100%", sm: 140 },
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "2px",
+                                },
+                            }}
+                        />
+
+                        {/* License plate */}
+                        <TextField
+                            label="License Plate"
+                            variant="outlined"
+                            size="small"
+                            value={licensePlate}
+                            onChange={(e) =>
+                                setLicensePlate(e.target.value.toUpperCase())
+                            }
+                            placeholder="e.g. ABC1234"
+                            inputProps={{ maxLength: 10 }}
+                            sx={{
+                                minWidth: { xs: "100%", sm: 150 },
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "2px",
+                                },
+                            }}
+                        />
+
+                        {/* VIN Number */}
+                        <TextField
+                            label="Vin #"
+                            variant="outlined"
+                            size="small"
+                            value={vinNumber}
+                            onChange={(e) =>
+                                setVinNumber(e.target.value.toUpperCase())
+                            }
+                            placeholder="1HGCM82633A123456"
+                            inputProps={{ maxLength: 17 }}
                         />
 
                         {/* Location select */}
@@ -327,6 +462,9 @@ function ProcessSection() {
                                     setLocation(e.target.value)
                                 }
                             >
+                                <MenuItem value="">
+                                    <em style={{ color: "gray" }}>— Clear —</em>
+                                </MenuItem>
                                 {LOCATIONS.map((loc) => (
                                     <MenuItem key={loc.value} value={loc.value}>
                                         {loc.label}
@@ -335,12 +473,134 @@ function ProcessSection() {
                             </Select>
                         </FormControl>
 
+                        {/* Car make (optional) */}
+                        <FormControl
+                            size="small"
+                            sx={{
+                                minWidth: { xs: "100%", sm: 160 },
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "2px",
+                                },
+                            }}
+                        >
+                            <InputLabel id="checkin-make-label">
+                                Car Make Optional
+                            </InputLabel>
+                            <Select
+                                labelId="checkin-make-label"
+                                value={carMake}
+                                label="Car Make"
+                                onChange={(e: SelectChangeEvent) =>
+                                    setCarMake(e.target.value)
+                                }
+                            >
+                                <MenuItem value="">
+                                    <em style={{ color: "gray" }}>— Clear —</em>
+                                </MenuItem>
+                                {CAR_MAKES.map((make) => (
+                                    <MenuItem key={make} value={make}>
+                                        {make}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        {/* Car color (optional) */}
+                        <FormControl
+                            size="small"
+                            sx={{
+                                minWidth: { xs: "100%", sm: 150 },
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "2px",
+                                },
+                            }}
+                        >
+                            <InputLabel id="checkin-color-label">
+                                Color Optional
+                            </InputLabel>
+                            <Select
+                                labelId="checkin-color-label"
+                                value={carColor}
+                                label="Color"
+                                onChange={(e: SelectChangeEvent) =>
+                                    setCarColor(e.target.value)
+                                }
+                                renderValue={(val) => (
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 1,
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                width: 12,
+                                                height: 12,
+                                                borderRadius: "50%",
+                                                bgcolor:
+                                                    HEX_COLORS[
+                                                        val as keyof typeof HEX_COLORS
+                                                    ],
+                                                border: `1px solid rgba(255,255,255,0.2)`,
+                                                flexShrink: 0,
+                                            }}
+                                        />
+                                        {val}
+                                    </Box>
+                                )}
+                            >
+                                <MenuItem value="">
+                                    <em style={{ color: "gray" }}>— Clear —</em>
+                                </MenuItem>
+                                {Object.entries(HEX_COLORS).map(
+                                    ([name, hex]) => (
+                                        <MenuItem key={name} value={name}>
+                                            <Box
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    gap: 1.5,
+                                                }}
+                                            >
+                                                <Box
+                                                    sx={{
+                                                        width: 14,
+                                                        height: 14,
+                                                        borderRadius: "50%",
+                                                        bgcolor: hex,
+                                                        border: `1px solid rgba(255,255,255,0.2)`,
+                                                        flexShrink: 0,
+                                                    }}
+                                                />
+                                                {name}
+                                            </Box>
+                                        </MenuItem>
+                                    ),
+                                )}
+                            </Select>
+                        </FormControl>
+
+                        {/* Submit error */}
+                        {submitError && (
+                            <Typography
+                                variant="caption"
+                                sx={{
+                                    color: "error.main",
+                                    width: "100%",
+                                    mt: -1,
+                                }}
+                            >
+                                {submitError}
+                            </Typography>
+                        )}
+
                         {/* Submit */}
                         <Button
                             variant="contained"
                             color="primary"
                             disableElevation
-                            disabled={!canSubmit}
+                            disabled={!canSubmit || submitting}
                             onClick={handleSubmit}
                             sx={{
                                 borderRadius: "2px",
@@ -355,8 +615,16 @@ function ProcessSection() {
                         </Button>
                     </Box>
                 </Box>
+                {/* ── Check-in log table ───────────────────────────────── */}
+                <CheckInsTable
+                    rows={checkInRows}
+                    loading={checkInLoading}
+                    error={checkInError}
+                    onRefresh={fetchCheckIns}
+                />
+
                 {/* ── Locations map ───────────────────────────────────── */}
-                <LocationsMap />
+                <LocationsMap rows={checkInRows} />
             </Container>
         </Box>
     );

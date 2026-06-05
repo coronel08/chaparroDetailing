@@ -1,31 +1,33 @@
+import { useMemo } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Box, Typography, useTheme } from "@mui/material";
 import L from "leaflet";
 import PlaceIcon from "@mui/icons-material/Place";
 import { renderToStaticMarkup } from "react-dom/server";
+import type { CheckIn } from "../api/checkins";
 
 // ── Swap these for your real site coordinates / names ─────────────────────
 const LOCATIONS = [
     {
-        id: "loc-1",
-        label: "Location 1",
-        address: "Downtown Los Angeles, CA",
-        lat: 34.0522,
-        lng: -118.2437,
+        id: "Manchester Hertz",
+        label: "Manchester Hertz",
+        address: "970 W Manchester Blvd, Inglewood, CA 90301",
+        lat: 33.9597463,
+        lng: -118.3732024,
     },
     {
-        id: "loc-2",
-        label: "Location 2",
-        address: "Pasadena, CA",
-        lat: 34.1478,
-        lng: -118.1445,
+        id: "Century Hertz",
+        label: "Century Hertz",
+        address: "5251 W 98th St, Los Angeles, CA",
+        lat: 33.9500921,
+        lng: -118.3735559,
     },
     {
-        id: "loc-3",
-        label: "Location 3",
-        address: "Burbank, CA",
-        lat: 34.1808,
-        lng: -118.3089,
+        id: "LAX",
+        label: "LAX",
+        address: "1 World Way, Los Angeles, CA 90045",
+        lat: 33.9460203,
+        lng: -118.4010335,
     },
 ];
 
@@ -56,10 +58,23 @@ const centerLat =
 const centerLng =
     LOCATIONS.reduce((sum, l) => sum + l.lng, 0) / LOCATIONS.length;
 
-function LocationsMap() {
+interface Props {
+    rows: CheckIn[];
+}
+
+function LocationsMap({ rows }: Props) {
     const theme = useTheme();
     const markerColor = theme.palette.primary.main;
     const icon = makeIcon(markerColor);
+
+    // Count check-ins per location address — derived from shared rows
+    const counts = useMemo(() => {
+        const tally: Record<string, number> = {};
+        for (const row of rows) {
+            tally[row.location] = (tally[row.location] ?? 0) + 1;
+        }
+        return tally;
+    }, [rows]);
 
     return (
         <Box
@@ -105,7 +120,7 @@ function LocationsMap() {
             >
                 <MapContainer
                     center={[centerLat, centerLng]}
-                    zoom={10}
+                    zoom={13}
                     style={{ height: "100%", width: "100%" }}
                     scrollWheelZoom={false}
                 >
@@ -122,13 +137,13 @@ function LocationsMap() {
                             icon={icon}
                         >
                             <Popup>
-                                <Box sx={{ p: 0.5 }}>
+                                <Box sx={{ p: 0.2 }}>
                                     <Typography
                                         sx={{
                                             fontFamily:
                                                 theme.typography.h6.fontFamily,
                                             fontWeight: 600,
-                                            fontSize: "0.95rem",
+                                            fontSize: "1.25rem",
                                             color: "text.primary",
                                             mb: 0.25,
                                         }}
@@ -150,11 +165,46 @@ function LocationsMap() {
                                         />
                                         <Typography
                                             variant="caption"
-                                            sx={{ color: "text.secondary" }}
+                                            sx={{
+                                                color: "text.secondary",
+                                                fontSize: ".85rem",
+                                            }}
                                         >
                                             {loc.address}
                                         </Typography>
                                     </Box>
+
+                                    {/* Check-in count badge */}
+                                    {counts[loc.address] !== undefined && (
+                                        <Box
+                                            sx={{
+                                                mt: 1,
+                                                display: "inline-flex",
+                                                alignItems: "center",
+                                                gap: 0.5,
+                                                px: 1,
+                                                py: 0.25,
+                                                borderRadius: "2px",
+                                                bgcolor: `${markerColor}22`,
+                                                border: `1px solid ${markerColor}55`,
+                                            }}
+                                        >
+                                            <Typography
+                                                variant="caption"
+                                                sx={{
+                                                    color: markerColor,
+                                                    fontWeight: 700,
+                                                    fontSize: "1rem",
+                                                    lineHeight: 1,
+                                                }}
+                                            >
+                                                {counts[loc.address]}{" "}
+                                                {counts[loc.address] === 1
+                                                    ? "check-in"
+                                                    : "check-ins"}
+                                            </Typography>
+                                        </Box>
+                                    )}
                                 </Box>
                             </Popup>
                         </Marker>

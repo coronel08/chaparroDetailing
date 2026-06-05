@@ -51,13 +51,13 @@ function Footer() {
                                     color: "text.primary",
                                 }}
                             >
-                                Chaparro
+                                Hertz
                             </Typography>
                             <Typography
                                 className="footer-brand-sub"
                                 sx={{ color: "primary.main" }}
                             >
-                                Detailing
+                                Key Library
                             </Typography>
                         </Link>
                         <Typography
@@ -118,7 +118,7 @@ function Footer() {
                                         flexShrink: 0,
                                     }}
                                 />
-                                <Link
+                                {/* <Link
                                     href="tel:+13235109665"
                                     underline="hover"
                                     sx={{
@@ -128,7 +128,7 @@ function Footer() {
                                     }}
                                 >
                                     (323) 510-9665
-                                </Link>
+                                </Link> */}
                             </Box>
                         </Box>
                     </Box>

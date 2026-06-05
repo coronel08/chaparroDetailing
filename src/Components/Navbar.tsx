@@ -26,7 +26,7 @@ function Navbar() {
 
     const navLinks = [
         { label: t("nav.process"), href: "#process" },
-        { label: t("nav.gallery"), href: "#gallery" },
+        // { label: t("nav.gallery"), href: "#gallery" },
     ];
 
     const toggleLang = () => {
@@ -81,13 +81,13 @@ function Navbar() {
                                 color: "text.primary",
                             }}
                         >
-                            Chaparro
+                            Hertz
                         </Typography>
                         <Typography
                             className="nav-logo-sub"
                             sx={{ color: "primary.main" }}
                         >
-                            Detailing
+                            Key Library
                         </Typography>
                     </Box>
 
@@ -125,7 +125,7 @@ function Navbar() {
                             gap: 3,
                         }}
                     >
-                        <Box
+                        {/* <Box
                             component="a"
                             href="tel:+13235109665"
                             className="nav-phone-link"
@@ -138,7 +138,7 @@ function Navbar() {
                         >
                             <PhoneIcon sx={{ fontSize: "1rem" }} />
                             (323) 510-9665
-                        </Box>
+                        </Box> */}
 
                         {/* Language toggle */}
                         <Box
@@ -237,7 +237,7 @@ function Navbar() {
 
                 {/* Mobile phone + lang toggle */}
                 <Box className="nav-mobile-actions col-list">
-                    <Box
+                    {/* <Box
                         component="a"
                         href="tel:+13235109665"
                         className="nav-mobile-phone"
@@ -247,7 +247,7 @@ function Navbar() {
                             sx={{ color: "primary.main", fontSize: "1.25rem" }}
                         />
                         (323) 510-9665
-                    </Box>
+                    </Box> */}
 
                     {/* Mobile language toggle */}
                     <Box
